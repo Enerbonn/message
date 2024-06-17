@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SECRET MESSAGE: Enter Your Name</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1a1a1a;
+            color: #ff3333;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #ff3333;
+        }
+        p, input, button {
+            margin-top: 10px;
+        }
+        input[type=text] {
+            padding: 10px;
+            font-size: 1em;
+            border: 2px solid #ff3333;
+            border-radius: 5px;
+            color: #ffffff;
+            background-color: #333333;
+            width: calc(100% - 24px);
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #ff3333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #b30000;
+        }
+        #note {
+            font-style: italic;
+            color: #ffcc00;
+        }
+        #message {
+            display: none;
+            margin-top: 20px;
+            color: #ffffff;
+            font-size: 2em;
+            font-weight: bold;
+        }
+        .fadeIn {
+            animation: fadeIn 2s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .fadeOut {
+            animation: fadeOut 2s;
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+        /* Media query for smaller screens */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5em;
+            }
+            input[type=text], button {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="spy-background"></div>
+    <h1>SECRET MESSAGE</h1>
+    <p>Enter your first name:</p>
+    <input type="text" id="firstNameInput" placeholder="Your First Name">
+    <button onclick="checkFirstName()">Submit</button>
+    <p id="note">NOTE: Do not use special characters.</p>
+    <p id="message"></p>
+
+    <script>
+        function checkFirstName() {
+            var firstName = document.getElementById('firstNameInput').value.toLowerCase();
+            if (firstName === 'princes') {
+                showTemporaryMessage("Hala, my baby :>", proceedToPasswordPage);
+            } else {
+                alert("Engk, alis ka na dito.");
+            }
+        }
+
+        function showTemporaryMessage(message, callback) {
+            var messageElement = document.getElementById('message');
+            messageElement.innerText = message;
+            messageElement.classList.add('fadeIn');
+            messageElement.style.display = 'block';
+
+            setTimeout(() => {
+                messageElement.classList.remove('fadeIn');
+                messageElement.classList.add('fadeOut');
+
+                setTimeout(() => {
+                    messageElement.style.display = 'none';
+                    messageElement.classList.remove('fadeOut');
+                    callback();
+                }, 2000);
+            }, 2000);
+        }
+
+        function proceedToPasswordPage() {
+            document.body.classList.add('fadeOut');
+            setTimeout(() => {
+                window.location.href = "password.html";
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
